@@ -26,7 +26,7 @@ func CreateAdminController(router *gin.RouterGroup, adminService usecase.Registe
 	router.GET("/admin/:uuid", inDB.GetByUUID)
 	router.POST("/logout", middlewares.TokenAuthMiddleware(), inDB.logout)
 	router.PUT("/admin/:id", inDB.UpdateData)
-	router.PATCH("admin/:id", inDB.DeleteAdmin)
+	router.DELETE("admin/:id", inDB.DeleteAdmin)
 }
 
 func (a *AdminController) AddRole(c *gin.Context) {
