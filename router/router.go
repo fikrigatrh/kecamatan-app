@@ -18,11 +18,15 @@ func Router() *gin.Engine {
 	adminRepo := repo.CreateRegisterRepoImpl(db)
 	adminService := usecase.CreateRegisterServiceImpl(adminRepo)
 
+	bantuanRepo := repo.CreateBantuanRepoImpl(db)
+	bantuanUsecase := usecase.CreateBantuanUsecase(bantuanRepo)
+
 	v1 := router.Group("api/v1")
 
 	{
 		newRoute := v1.Group("ms-kecamatan")
 		controller.CreateAdminController(newRoute, adminService)
+		controller.CreateBantuanController(newRoute, bantuanUsecase)
 	}
 	//s.ListenAndServe()
 	//router.Run(port)
