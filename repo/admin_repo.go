@@ -24,8 +24,8 @@ type RegisterRepoInterface interface {
 	GetAdminByUsername(username string) (*models.User, error)
 	GetUserRoleByID(userID int) (*models.UserRole, error)
 	GetRoleByID(id int) (*models.Role, error)
-	UpdateAdmin(IDAdmin int, data *models.User) (*models.User, error)
-	DeleteAdmin(IDAdmin int) error
+	UpdateAdmin(uuid string, data *models.User) (*models.User, error)
+	DeleteAdmin(uuid string) error
 	BeginTrans() *gorm.DB
 	CheckData(username string) bool
 	CreateUserRole(data *models.UserRole)
@@ -156,10 +156,10 @@ func (r *RegisterStruct) GetAllAdmin() (*models.ResponseGetAllAdmin, error) {
 }
 
 // UpdateAdmin ...
-func (r *RegisterStruct) UpdateAdmin(IDAdmin int, data *models.User) (*models.User, error) {
+func (r *RegisterStruct) UpdateAdmin(uuid string, data *models.User) (*models.User, error) {
 	tx := r.db.Begin()
 
-	err := r.db.Debug().Model(&data).Where("id = ? AND is_delete=?", IDAdmin, 1).Update(data).Error
+	err := r.db.Debug().Model(&data).Where("uuid = ? AND is_delete=?", uuid, 1).Update(data).Error
 	if err != nil {
 		tx.Rollback()
 		return nil, fmt.Errorf("[StudentRepo.Update] Error when query update data with error: %w", err)
@@ -170,9 +170,9 @@ func (r *RegisterStruct) UpdateAdmin(IDAdmin int, data *models.User) (*models.Us
 }
 
 // DeleteAdmin ...
-func (r *RegisterStruct) DeleteAdmin(IDAdmin int) error {
+func (r *RegisterStruct) DeleteAdmin(uuid string) error {
 	data := models.User{}
-	err := r.db.Debug().Model(&data).Where("id = ? AND is_delete=?", IDAdmin, 1).Update("is_delete", 0).Error
+	err := r.db.Debug().Model(&data).Where("uuid = ? AND is_delete=?", uuid, 1).Update("is_delete", 0).Error
 	if err != nil {
 		return fmt.Errorf("[StudentRepo.Delete] Error when query delete data with error: %w", err)
 	}

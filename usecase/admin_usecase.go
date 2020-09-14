@@ -25,8 +25,8 @@ type RegisterServiceInterface interface {
 	GetAdminByUsername(username string) (*models.User, error)
 	GetUserRoleByID(userID int) (*models.UserRole, error)
 	GetRoleByID(id int) (*models.Role, error)
-	UpdateAdmin(IDAdmin int, data *models.User) (*models.User, error)
-	DeleteAdmin(id int) error
+	UpdateAdmin(uuid string, data *models.User) (*models.User, error)
+	DeleteAdmin(uuid string) error
 	SignIn(authD models.Auth) (string, error)
 	LoginService(username, password string) (string, error)
 	CheckData(username string) bool
@@ -172,10 +172,10 @@ func (r *RegisterService) GetAdminByID(id int) (*models.User, error) {
 	return admin, nil
 }
 
-func (r *RegisterService) UpdateAdmin(IDAdmin int, data *models.User) (*models.User, error) {
-	firstData, err := r.registerRepo.GetAdminByID(IDAdmin)
+func (r *RegisterService) UpdateAdmin(uuid string, data *models.User) (*models.User, error) {
+	firstData, err := r.registerRepo.GetAdminByUUID(uuid)
 	if err != nil {
-		return nil, errors.New("studentID does not exist")
+		return nil, errors.New("ID does not exist")
 	}
 
 	if data.Username == "" {
@@ -185,7 +185,7 @@ func (r *RegisterService) UpdateAdmin(IDAdmin int, data *models.User) (*models.U
 		data.Password = firstData.Password
 	}
 
-	student, err := r.registerRepo.UpdateAdmin(IDAdmin, data)
+	student, err := r.registerRepo.UpdateAdmin(uuid, data)
 	if err != nil {
 		return nil, err
 	}
@@ -194,13 +194,13 @@ func (r *RegisterService) UpdateAdmin(IDAdmin int, data *models.User) (*models.U
 
 }
 
-func (r *RegisterService) DeleteAdmin(id int) error {
-	_, err := r.registerRepo.GetAdminByID(id)
+func (r *RegisterService) DeleteAdmin(uuid string) error {
+	_, err := r.registerRepo.GetAdminByUUID(uuid)
 	if err != nil {
-		return errors.New("UUID UserDB does not exist")
+		return errors.New("UUID does not exist")
 	}
 
-	err = r.registerRepo.DeleteAdmin(id)
+	err = r.registerRepo.DeleteAdmin(uuid)
 	if err != nil {
 		return err
 	}

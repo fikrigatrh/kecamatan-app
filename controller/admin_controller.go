@@ -9,7 +9,6 @@ import (
 	"kecamatan_app/utils"
 	"log"
 	"net/http"
-	"strconv"
 )
 
 type AdminController struct {
@@ -25,8 +24,8 @@ func CreateAdminController(router *gin.RouterGroup, adminService usecase.Registe
 	router.GET("/admins", inDB.GetAllAdmin)
 	router.GET("/admin/:uuid", inDB.GetByUUID)
 	router.POST("/logout", middlewares.TokenAuthMiddleware(), inDB.logout)
-	router.PUT("/admin/:id", inDB.UpdateData)
-	router.DELETE("admin/:id", inDB.DeleteAdmin)
+	router.PUT("/admin/:uuid", inDB.UpdateData)
+	router.DELETE("admin/:uuid", inDB.DeleteAdmin)
 }
 
 func (a *AdminController) AddRole(c *gin.Context) {
@@ -108,7 +107,7 @@ func (a *AdminController) GetAllAdmin(c *gin.Context) {
 }
 
 func (a *AdminController) UpdateData(c *gin.Context) {
-	id, _ := strconv.Atoi(c.Param("id"))
+	uuid := c.Param("uuid")
 	var admin models.User
 
 	err := c.ShouldBindJSON(&admin)
@@ -120,11 +119,11 @@ func (a *AdminController) UpdateData(c *gin.Context) {
 
 	dataCheck := a.adminService.CheckData(admin.Username)
 	if dataCheck == true {
-		utils.ErrorMessage(c, http.StatusInternalServerError, "Kelas Sudahh Terdaftar")
+		utils.ErrorMessage(c, http.StatusInternalServerError, "Data Admin Sudahh Terdaftar")
 		return
 	}
 
-	data, err := a.adminService.UpdateAdmin(id, &admin)
+	data, err := a.adminService.UpdateAdmin(uuid, &admin)
 	if err != nil {
 		utils.ErrorMessage(c, http.StatusInternalServerError, err.Error())
 		fmt.Printf("[StudentController.updateStudent] Error when request data to usecase with error : %v", err)
@@ -134,13 +133,9 @@ func (a *AdminController) UpdateData(c *gin.Context) {
 }
 
 func (a *AdminController) DeleteAdmin(c *gin.Context) {
-	id, err := strconv.Atoi(c.Param("id"))
-	if err != nil {
-		utils.ErrorMessage(c, http.StatusInternalServerError, "UUID not valid ")
-		fmt.Printf("[ClassController.UpdateData] Error when convert pathvar with error: %v\n", err)
-		return
-	}
-	err = a.adminService.DeleteAdmin(id)
+	uuid := c.Param("uuid")
+
+	err := a.adminService.DeleteAdmin(uuid)
 	if err != nil {
 		utils.ErrorMessage(c, http.StatusInternalServerError, "Oppss, something error")
 		fmt.Printf("[ClassController.DeleteAdmin]Error when request data to usecase with error : %v\n", err)
