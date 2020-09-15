@@ -14,6 +14,7 @@ type DataWarga struct {
 	TanggalLahir        string `json:"tanggal_lahir"`
 	Agama               string `json:"agama"`
 	GolDarah            string `json:"gol_darah"`
+	ProvinsiID          int    `json:"provinsi_id"`
 	Provinsi            string `json:"provinsi"`
 	KotaKabupaten       string `json:"kota_kabupaten"`
 	Kecamatan           string `json:"kecamatan"`
@@ -42,4 +43,12 @@ type DataWarga struct {
 // TableName ..
 func (s DataWarga) TableName() string {
 	return "tb_data_warga"
+}
+
+type DataWargaExample struct {
+	Nik         int    `json:"nik"`
+	NoKk        int    `json:"no_kk"`
+	ProvinsiID  int    `json:"provinsi_id"`
+	KotaKabID   int    `json:"kota_kab_id"`
+	NamaKotaKab string `json:"nama_kota_kab"`
 }

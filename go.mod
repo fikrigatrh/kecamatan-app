@@ -7,7 +7,6 @@ require (
 	github.com/dgrijalva/jwt-go v3.2.0+incompatible
 	github.com/gin-gonic/gin v1.6.3
 	github.com/go-sql-driver/mysql v1.5.0
-	github.com/google/uuid v1.1.2
 	github.com/incubus8/go v0.0.0-20180624150828-6dfffa306ab7
 	github.com/jinzhu/gorm v1.9.16
 	github.com/jinzhu/now v1.1.1 // indirect
@@ -20,5 +19,6 @@ require (
 	github.com/twinj/uuid v1.0.0
 	github.com/tylerb/graceful v1.2.15 // indirect
 	golang.org/x/crypto v0.0.0-20191205180655-e7c4368fe9dd
+	gopkg.in/resty.v1 v1.12.0
 	gopkg.in/stretchr/testify.v1 v1.2.2 // indirect
 )
