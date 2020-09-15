@@ -21,7 +21,7 @@ func CreateDataWargaController(router *gin.RouterGroup, dataWargaService usecase
 }
 
 func (a *DataWargaController) AddDataWarga(c *gin.Context) {
-	var dataWarga models.DataWargaExample
+	var dataWarga models.DataWarga
 
 	err := c.ShouldBindJSON(&dataWarga)
 	if err != nil {

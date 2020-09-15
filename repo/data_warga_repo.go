@@ -11,7 +11,7 @@ type DataWargaRepoImpl struct {
 }
 
 type DataWargaInterface interface {
-	CreateDataWarga(data *models.DataWargaExample) (*models.DataWargaExample, error)
+	CreateDataWarga(data *models.DataWarga) (*models.DataWarga, error)
 }
 
 // CreateBantuanRepoImpl ...
@@ -19,7 +19,7 @@ func CreateDataWargaRepoImpl(db *gorm.DB) DataWargaInterface {
 	return &DataWargaRepoImpl{db}
 }
 
-func (b *DataWargaRepoImpl) CreateDataWarga(data *models.DataWargaExample) (*models.DataWargaExample, error) {
+func (b *DataWargaRepoImpl) CreateDataWarga(data *models.DataWarga) (*models.DataWarga, error) {
 	tx := b.db.Begin()
 	if err := tx.Debug().Create(&data).Error; err != nil {
 		tx.Rollback()

@@ -10,15 +10,15 @@ type DaerahIndoUseCaseStruct struct {
 }
 
 type DaerahIndoUsecaseInterface interface {
-	GetDataProvinsi() (*models.ProvinsiStruct, error)
+	GetDataProvinsiByID(id int) (*models.ProvinsiStruct, error)
 }
 
 func CreateDaerahUsecase(daerahIndoUsecase repo.DaerahRepoInterface) DaerahIndoUsecaseInterface {
 	return &DaerahIndoUseCaseStruct{daerahIndoUsecase}
 }
 
-func (d *DaerahIndoUseCaseStruct) GetDataProvinsi() (*models.ProvinsiStruct, error)  {
-	data, err := d.daerahIndoUsecase.GetDataProvinsi()
+func (d *DaerahIndoUseCaseStruct) GetDataProvinsiByID(id int) (*models.ProvinsiStruct, error)  {
+	data, err := d.daerahIndoUsecase.GetDataProvinsiByID(id)
 	if err != nil {
 		return nil, err
 	}

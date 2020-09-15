@@ -6,6 +6,7 @@ import (
 	"kecamatan_app/usecase"
 	"kecamatan_app/utils"
 	"net/http"
+	"strconv"
 )
 
 type DaerahController struct {
@@ -15,11 +16,12 @@ type DaerahController struct {
 func CreateDaerahController(router *gin.RouterGroup, daerahService usecase.DaerahIndoUsecaseInterface) {
 	inDB := DaerahController{daerahService}
 
-	router.GET("/daerah-all", inDB.GetAllAdmin)
+	router.GET("/provinsi/:id", inDB.GetProvinsiByID)
 }
 
-func (a *DaerahController) GetAllAdmin(c *gin.Context) {
-	data, err := a.daerahService.GetDataProvinsi()
+func (a *DaerahController) GetProvinsiByID(c *gin.Context) {
+	id,_ := strconv.Atoi(c.Param("id"))
+	data, err := a.daerahService.GetDataProvinsiByID(id)
 	if err != nil {
 		utils.ErrorMessage(c, http.StatusBadRequest, "Oppss, something error ")
 		fmt.Printf("[ClassController.GetAdmin] Error when request data to usecase with error: %v\n", err)
