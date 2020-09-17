@@ -2,6 +2,15 @@ package models
 
 import "github.com/jinzhu/gorm"
 
+type ResponseGetAllDataWarga struct {
+	TotalData   int         `json:"total_data"`
+	DataPerPage int         `json:"data_per_page"`
+	TotalPage   int         `json:"total_page"`
+	FirstPage   int         `json:"first_page"`
+	EndPage     int         `json:"end_page"`
+	Data        []DataWarga `json:"data"`
+}
+
 type DataWarga struct {
 	gorm.Model
 	Nik                 int    `json:"nik"`
@@ -18,9 +27,9 @@ type DataWarga struct {
 	KotaKabID           int    `sql:"-" json:"kota_kab_id,omitempty"`
 	KecamatanID         int    `sql:"-" json:"kecamatan_id,omitempty"`
 	KelurahanID         int    `sql:"-" json:"kelurahan_id,omitempty"`
-	Alamat              string `sql:"-" json:"alamat"`
-	RW                  string `sql:"-" json:"rw"`
-	RT                  string `sql:"-" json:"rt"`
+	Alamat              string `sql:"-" json:"alamat,omitempty"`
+	RW                  string `sql:"-" json:"rw,omitempty"`
+	RT                  string `sql:"-" json:"rt,omitempty"`
 	DetailAlamat        string `sql:"type:JSONB NOT NULL DEFAULT '{}'::JSONB" json:"detail_alamat"`
 	StatusPerkawinan    string `json:"status_perkawinan"`
 	NoBukuNikah         int    `json:"no_buku_nikah"`
@@ -46,19 +55,11 @@ func (s DataWarga) TableName() string {
 }
 
 type DetailAlamat struct {
-	Provinsi            string `json:"provinsi"`
-	KotaKabupaten       string `json:"kota_kabupaten"`
-	Kecamatan           string `json:"kecamatan"`
-	Kelurahan           string `json:"kelurahan"`
-	Alamat              string `json:"alamat"`
-	RW                  string `json:"rw"`
-	RT                  string `json:"rt"`
+	Provinsi      string `json:"provinsi"`
+	KotaKabupaten string `json:"kota_kabupaten"`
+	Kecamatan     string `json:"kecamatan"`
+	Kelurahan     string `json:"kelurahan"`
+	Alamat        string `json:"alamat"`
+	RW            string `json:"rw"`
+	RT            string `json:"rt"`
 }
-
-//type DataWarga struct {
-//	Nik         int    `json:"nik"`
-//	NoKk        int    `json:"no_kk"`
-//	ProvinsiID  int    `json:"provinsi_id"`
-//	KotaKabID   int    `json:"kota_kab_id"`
-//	NamaKotaKab string `json:"nama_kota_kab"`
-//}

@@ -55,7 +55,8 @@ func (b *BantuanPemerintahRepoImpl) GetAllData() (*models.ResponseGetAllBantuan,
 	rows, err := b.db.Debug().Raw("SELECT * from tb_bantuan_pemerintah;").Rows()
 	defer rows.Close()
 	for rows.Next() {
-		rows.Scan(&data.ID, &data.CreatedAt, &data.UpdatedAt, &data.DeletedAt, &data.NamaBantuan, &data.IsDelete)
+		rows.Scan(&data.ID, &data.CreatedAt, &data.UpdatedAt, &data.DeletedAt,
+			&data.NamaBantuan, &data.IsDelete)
 		if err != nil {
 			tx.Rollback()
 			return nil, fmt.Errorf("[StudentRepo.GetByID] Error when query GetByID data with error: %w", err)

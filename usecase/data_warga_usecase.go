@@ -15,6 +15,7 @@ type DataWargaUsecaseImpl struct {
 
 type DataWargaUsecaseInterface interface {
 	CreateDataWarga(data *models.DataWarga) (*models.DataWarga, error)
+	GetAllData() (*models.ResponseGetAllDataWarga, error)
 }
 
 // CreateBantuanUsecaseImpl ...
@@ -75,4 +76,13 @@ func (d *DataWargaUsecaseImpl) CreateDataWarga(data *models.DataWarga) (*models.
 	}
 
 	return result, nil
+}
+
+func (d *DataWargaUsecaseImpl) GetAllData() (*models.ResponseGetAllDataWarga, error) {
+	data, err := d.dataWargaUsecase.GetAllData()
+	if err != nil {
+		log.Println("ERROR WHEN GET DATA FROM REPO DATA ALL WARGA")
+		return nil, err
+	}
+	return data, nil
 }

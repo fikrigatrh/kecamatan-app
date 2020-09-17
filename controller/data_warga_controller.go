@@ -17,6 +17,7 @@ func CreateDataWargaController(router *gin.RouterGroup, dataWargaService usecase
 	inDB := DataWargaController{dataWargaService}
 
 	router.POST("/add-data-warga", inDB.AddDataWarga)
+	router.GET("/warga-all", inDB.GetAllDataWarga)
 
 }
 
@@ -34,6 +35,17 @@ func (a *DataWargaController) AddDataWarga(c *gin.Context) {
 	if err != nil {
 		utils.ErrorMessage(c, http.StatusBadRequest, "OPPSSSSSSSSS")
 		fmt.Printf("[DataWargaController.AddDataWargaPemerintah] Error when request data to usecase with error: %v\n", err)
+		return
+	}
+
+	utils.SuccessData(c, http.StatusOK, data)
+}
+
+func (a *DataWargaController) GetAllDataWarga(c *gin.Context) {
+	data, err := a.dataWargaService.GetAllData()
+	if err != nil {
+		utils.ErrorMessage(c, http.StatusBadRequest, "Oppss, something error ")
+		fmt.Printf("[ClassController.GetAdmin] Error when request data to usecase with error: %v\n", err)
 		return
 	}
 

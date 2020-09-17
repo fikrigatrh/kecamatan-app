@@ -5,7 +5,7 @@ import "github.com/jinzhu/gorm"
 func InitTable(db *gorm.DB) {
 
 	//db.DropTableIfExists(&BantuanPemerintah{})
-	db.DropTableIfExists(&DataWarga{})
+	//db.DropTableIfExists(&DataWarga{})
 	//db.DropTableIfExists(&User{})
 
 	db.AutoMigrate(&Auth{})
