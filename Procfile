@@ -1,1 +1,1 @@
-web: bin/kecamatan-app
+web: bin/kecamatan_app
