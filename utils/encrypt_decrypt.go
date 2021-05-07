@@ -89,6 +89,7 @@ func HashPassword(user *models.User) (*models.User, error) {
 		fmt.Printf("[UserController.SetPassword] Error when generate password with error: %v\n", err)
 		return nil, nil
 	}
+	//
 	user.Password = string(passwordHash)
 	return user, nil
 }
