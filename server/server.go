@@ -7,6 +7,7 @@ import (
 	"github.com/subosito/gotenv"
 	"kecamatan_app/driver"
 	"kecamatan_app/router"
+	"os"
 )
 
 func init() {
@@ -14,7 +15,8 @@ func init() {
 }
 
 func StartServer()  {
-	addr := driver.Config.ServiceHost + ":" + driver.Config.ServicePort
+	port := os.Getenv("SERVICE_PORT")
+	addr := driver.Config.ServiceHost + ":" + port
 	fmt.Println(driver.Config.ServicePort,"<<<<<<")
 	conf := g.Config{
 		ListenAddr: addr,
