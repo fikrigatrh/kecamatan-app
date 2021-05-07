@@ -8,6 +8,7 @@ type ResponseGetAllDataWarga struct {
 	TotalPage   int         `json:"total_page"`
 	FirstPage   int         `json:"first_page"`
 	EndPage     int         `json:"end_page"`
+	Duration    string      `json:"duration"`
 	Data        []DataWarga `json:"data"`
 }
 
@@ -47,6 +48,7 @@ type DataWarga struct {
 	NoAjb               int    `json:"no_ajb"`
 	NoSpptPbb           int    `json:"no_sppt_pbb"`
 	BantuanPemerintahID int    `json:"bantuan_pemerintah_id"`
+	JenPend             string `json:"jen_pend"`
 }
 
 // TableName ..

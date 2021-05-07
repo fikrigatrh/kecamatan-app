@@ -24,10 +24,10 @@ func ConnectDB() *gorm.DB {
 		log.Println("Connected to Database Development")
 	} else if dbConfig.Adapter == "postgressql" {
 		DB, err = gorm.Open("postgres", fmt.Sprintf("postgres://%s:%s@%s/%s?sslmode=disable", dbConfig.UserDB, dbConfig.Password, dbConfig.Host, dbConfig.Name))
-		log.Println("Connected to Database Local")
+		log.Println("Connected to Database Local postgressql")
 	} else if dbConfig.Adapter == "cockroachsql" {
 		DB, err = gorm.Open("postgres", fmt.Sprintf("postgresql://%s@%s:%s/%s?sslmode=disable", dbConfig.UserDB, dbConfig.Host, dbConfig.Port, dbConfig.Name))
-		log.Println("Connected to Database Local")
+		log.Println("Connected to Database Local cockroachsql")
 	}
 
 	if err != nil {

@@ -15,8 +15,8 @@ func InitTable(db *gorm.DB) {
 	db.AutoMigrate(&BantuanPemerintah{})
 	db.AutoMigrate(&DataWarga{})
 
-	db.Model(&UserRole{}).AddForeignKey("role_id", "tb_role(id)", "CASCADE", "CASCADE")
-	db.Model(&UserRole{}).AddForeignKey("user_id", "tb_user(id)", "CASCADE", "CASCADE")
+	//db.Model(&UserRole{}).AddForeignKey("role_id", "tb_role(id)", "CASCADE", "CASCADE")
+	//db.Model(&UserRole{}).AddForeignKey("user_id", "tb_user(id)", "CASCADE", "CASCADE")
 
 }
 

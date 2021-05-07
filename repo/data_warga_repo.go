@@ -43,11 +43,13 @@ func (b *DataWargaRepoImpl) GetAllData() (*models.ResponseGetAllDataWarga, error
 	for rows.Next() {
 		rows.Scan(&dataWarga.ID, &dataWarga.CreatedAt, &dataWarga.UpdatedAt, &dataWarga.DeletedAt, &dataWarga.Nik, &dataWarga.NoKk, &dataWarga.SudahMemilikiKTP, &dataWarga.NamaLengkap, &dataWarga.JenisKelamin, &dataWarga.Pendidikan, &dataWarga.TempatLahir, &dataWarga.TanggalLahir,
 			&dataWarga.Agama, &dataWarga.GolDarah, &dataWarga.DetailAlamat, &dataWarga.StatusPerkawinan, &dataWarga.NoBukuNikah, &dataWarga.JenisPekerjaan,&dataWarga.SHOK, &dataWarga.Kewarganegaraan, &dataWarga.Disabilitas, &dataWarga.NoPaspor, &dataWarga.NoKitasKitap, &dataWarga.NamaAyah,
-			&dataWarga.NamaIbu, &dataWarga.AlamatSesuaiKK, &dataWarga.StatusTempatTinggal, &dataWarga.NoShmHcb, &dataWarga.NoAjb, &dataWarga.NoSpptPbb, &dataWarga.BantuanPemerintahID)
+			&dataWarga.NamaIbu, &dataWarga.AlamatSesuaiKK, &dataWarga.StatusTempatTinggal, &dataWarga.NoShmHcb, &dataWarga.NoAjb, &dataWarga.NoSpptPbb, &dataWarga.BantuanPemerintahID, &dataWarga.JenPend)
 		if err != nil {
 			tx.Rollback()
 			return nil, fmt.Errorf("[StudentRepo.GetByID] Error when query GetByID data with error: %w", err)
 		}
+
+		dataWarga.JenPend = dataWarga.JenisKelamin + dataWarga.Pendidikan
 		dataCurrent = append(dataCurrent, dataWarga)
 	}
 

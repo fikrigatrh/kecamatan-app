@@ -43,6 +43,7 @@ func (a *DataWargaController) AddDataWarga(c *gin.Context) {
 
 func (a *DataWargaController) GetAllDataWarga(c *gin.Context) {
 	data, err := a.dataWargaService.GetAllData()
+
 	if err != nil {
 		utils.ErrorMessage(c, http.StatusBadRequest, "Oppss, something error ")
 		fmt.Printf("[ClassController.GetAdmin] Error when request data to usecase with error: %v\n", err)
