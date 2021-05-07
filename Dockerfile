@@ -8,6 +8,8 @@ WORKDIR /app
 
 RUN go mod download
 
+RUN go mod vendor download
+
 RUN go build -o main .
 
 CMD ["/app/main"]
