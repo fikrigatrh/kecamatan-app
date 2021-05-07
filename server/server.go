@@ -1,6 +1,7 @@
 package server
 
 import (
+	"fmt"
 	g "github.com/incubus8/go/pkg/gin"
 	"github.com/rs/zerolog/log"
 	"github.com/subosito/gotenv"
@@ -14,6 +15,7 @@ func init() {
 
 func StartServer()  {
 	addr := driver.Config.ServiceHost + ":" + driver.Config.ServicePort
+	fmt.Println(driver.Config.ServicePort,"<<<<<<")
 	conf := g.Config{
 		ListenAddr: addr,
 		Handler:    router.Router(),
