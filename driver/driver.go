@@ -23,7 +23,7 @@ func ConnectDB() *gorm.DB {
 		DB, err = gorm.Open("mysql", "root:secret@tcp(localhost:3306)/db_kecamatan?parseTime=true")
 		log.Println("Connected to Database Development")
 	} else if dbConfig.Adapter == "postgressql" {
-		DB, err = gorm.Open("postgres", fmt.Sprintf("postgres://%s:%s@%s/%s?sslmode=enable", dbConfig.UserDB, dbConfig.Password, dbConfig.Host, dbConfig.Name))
+		DB, err = gorm.Open("postgres", fmt.Sprintf("postgres://%s:%s@%s/%s", dbConfig.UserDB, dbConfig.Password, dbConfig.Host, dbConfig.Name))
 		log.Println("Connected to Database Local postgressql")
 	} else if dbConfig.Adapter == "cockroachsql" {
 		DB, err = gorm.Open("postgres", fmt.Sprintf("postgresql://%s@%s:%s/%s?sslmode=disable", dbConfig.UserDB, dbConfig.Host, dbConfig.Port, dbConfig.Name))
