@@ -12,7 +12,7 @@ require (
 	github.com/jinzhu/now v1.1.1 // indirect
 	github.com/joho/godotenv v1.3.0
 	github.com/lib/pq v1.8.0 // indirect
-	github.com/mitchellh/go-server-timing v1.0.1
+	github.com/mitchellh/go-server-timing v1.0.1 // indirect
 	github.com/myesui/uuid v1.0.0 // indirect
 	github.com/rs/zerolog v1.19.0
 	github.com/satori/go.uuid v1.2.0
