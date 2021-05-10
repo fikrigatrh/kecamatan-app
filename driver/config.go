@@ -17,7 +17,7 @@ type Database struct {
 
 type ServerConfig struct {
 	ServiceName string `env:"SERVICE_NAME"`
-	ServicePort string `env:"SERVICE_PORT"`
+	ServicePort string `env:"PORT"`
 	ServiceHost string `env:"SERVICE_HOST"`
 	DB          Database
 }
